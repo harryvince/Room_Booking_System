@@ -1,2 +1,2 @@
-# net2post
-Building a Website that uses hybrid mail to send post
+# DIGITECH - ROOM BOOKING SYSTEM
+Building a Website that DIGITECH can use to book rooms
