@@ -1,0 +1,87 @@
+html {
+  height: 100%;
+  width: 100%;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0px;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    height: 57px;
+    border-style: solid;
+    border-color: #333;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none!important;
+  font-weight: 500;
+}
+
+li a:hover:not(.active) {
+  background-color: #111;
+  color: white;
+}
+
+.active {
+  background: #c7acac;
+  background: #16222A; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to top, #6e5d5d , #ffaec8  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to top, #6e5d5d , #ffaec8  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  color: white!important;
+  font-weight: 500;
+}
+
+.usernameBox {
+  color: white!important;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none!important;
+  font-weight: 500;
+  display: block;
+}
+
+body {
+  /* Remember to use the other versions for IE 10 and older browsers! */
+  display: flex;
+  min-height: 100%;
+  font-family: 'lato', sans-serif;
+  color: #fff;
+  background: #c7acac;
+  background: #16222A; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to top, #352d2d , #ffaec8  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to top, #352d2d , #ffaec8  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  grid-template-rows: repeat(7, 1fr);
+}
+
+.toolbar {
+  grid-column: 1 / 6;
+  grid-row: 1;
+  border-style: solid;
+  border-color: rgb(47, 187, 59);
+}
+
+.one {
+  border-style: solid;
+  border-color: blue;
+  grid-column: 2;
+  grid-row: 2/7;
+}
+.two {
+  border-style: solid;
+  border-color: yellow;
+  grid-column: 4;
+  grid-row: 2/7;
+}
