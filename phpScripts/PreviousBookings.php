@@ -27,8 +27,9 @@ if ($result->num_rows > 0) {
         } else {
             $machines = "No";
         }
-        if ($userid == $_SESSION['userID'] && $date > $dateRN){
+        if ($userid == $_SESSION['userID'] && $date < $dateRN){
 ?>
+
 <tr>
     <td><?=$OGDATE?></td>
     <td><?=$Start?></td>

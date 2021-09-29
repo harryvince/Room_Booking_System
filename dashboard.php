@@ -34,6 +34,21 @@ require('phpScripts/scripts.php');
         </div>
         <div class="two" style="text-align:center; padding:20px;">
             Previous Bookings
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th>Booking Date</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Room Location</th>
+                    <th>Capacity</th>
+                    <th>Computers</th>
+                  </tr>
+                </thead>
+                <tbody id="Previous">
+
+                </tbody>
+            </table>
         </div> 
     </body>
 
@@ -45,6 +60,16 @@ require('phpScripts/scripts.php');
 		cache: false,
 		success: function(dataResult){
 			$('#table').html(dataResult);
+		}
+	});
+});
+    $(document).ready(function() {
+	$.ajax({
+		url: "phpScripts/PreviousBookings.php",
+		type: "POST",
+		cache: false,
+		success: function(dataResult){
+			$('#Previous').html(dataResult);
 		}
 	});
 });
