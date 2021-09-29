@@ -5,24 +5,28 @@ session_start();
 if(isset($_POST['username']) && isset($_POST['password'])) {
   $username = $_POST['username'];
   $password = $_POST['password'];
+  $userid;
 
   $password = hash('sha256', $password);
 
-  $stmt = $conn -> prepare('SELECT * FROM login_table WHERE username = ? and password = ?');
-  $stmt -> bind_param('ii', $username, $password);
+  $stmt = $conn -> prepare('SELECT * FROM login_table WHERE username = ? and password = ? LIMIT 1');
+  $stmt -> bind_param('ss', $username, $password);
   $stmt -> execute();
-  $result = $stmt -> get_result();
-
-  $row = mysqli_fetch_array($result);
-  if ($row['username'] == $username && $row['password'] == $password) {
-    $_SESSION['username'] = $username;
-    $_SESSION['password'] = $password;
-    header("Location: dashboard.php");
+  $stmt -> bind_result($userid, $username, $password);
+  $stmt -> store_result();
+  if($stmt->num_rows == 1){
+    if($stmt->fetch()){
+      $_SESSION['username'] = $username;
+      $_SESSION['password'] = $password;
+      $_SESSION['userID'] = $userid;
+      header("Location: dashboard.php");
+    }
   }
-   else {
+  else {
     echo "<br>";
     echo "<br>";
     echo "<p class='fonts' style='text-align: center; color: red;'>Incorrect Username or Password!</p>";
   }
+  $stmt->close();
 }
 ?>
