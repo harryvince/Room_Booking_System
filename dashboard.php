@@ -11,7 +11,7 @@ require('phpScripts/scripts.php');
             <ul class="toolbar">
                 <li><img src="images/icon.png" style="width:40px;height:40px;margin-top:5px;margin-right:5px;"></li>
                 <li><a href="dashboard.php"class="active">Home</a></li>
-                <li><a href="#news">Book a Classroom</a></li>
+                <li><a href="bookings.php">Book a Classroom</a></li>
                 <a href="phpScripts/logout.php"class="usernameBox" style="float:right"><?php echo $_SESSION['username'] ?></a>
             </ul>
         <div class="one" style="text-align:center; padding:20px;">
