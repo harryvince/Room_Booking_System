@@ -59,12 +59,6 @@ if ($result->num_rows > 0){
                 for($i = 9; $i <= 16; $i++){
                     $booked = "FALSE";
                     for($x = 0; $x < count($arrayOfBookings); $x++){
-                        // if((like_match('%'.strval($i).'%', $arrayOfBookings[$x]->get_booking())) != 1 && $row['RoomID'] != $arrayOfBookings[$x]->get_id()){
-                        //     $booked = "FALSE";
-                        // } else {
-                        //     $booked = "TRUE";
-                        //     $x = (count($arrayOfBookings) + 1);
-                        // }
                         if((like_match('%'.strval($i).'%', $arrayOfBookings[$x]->get_booking()) == 1 && $row['RoomID'] == $arrayOfBookings[$x]->get_id())){
                             $booked = "TRUE";
                             break;
@@ -76,7 +70,7 @@ if ($result->num_rows > 0){
                 ?>
 
 <tr>
-    <td><?=$layout?></td>
+    <td><img src="images/<?=$room?>.jpeg" style="width:50px;height:50px;"></td>
     <td><?=$room?></td>
     <td><?=$capacity?></td>
     <td><?=$computers?></td>
