@@ -21,8 +21,8 @@ $bookingTime = $bookingTime.$addedEnd;
 $endOfBooking = $end.$addedEnd;
 
 $date = date('Y-m-d', strtotime('+1 day'));
-$booking = date("h:i:s", strtotime($bookingTime));
-$bookingEnd = date("h:i:s", strtotime($endOfBooking));
+$booking = date("H:i:s", strtotime($bookingTime));
+$bookingEnd = date("H:i:s", strtotime($endOfBooking));
 
 mysqli_query($conn, "INSERT INTO booking_table (userId, RoomID, DateOfBooking, StartTime, EndTime) 
 VALUES ($user_id, $room_id, '" . $date . "', '" . $booking . "', '" . $bookingEnd . "')");
