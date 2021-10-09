@@ -1,7 +1,7 @@
 <?php 
 require('phpScripts/auth_session.php');
 require('phpScripts/scripts.php');
-
+$date = date('Y-m-d', strtotime('+1 day'));
 ?>
 <html>
     <head>
@@ -15,7 +15,7 @@ require('phpScripts/scripts.php');
                 <a href="phpScripts/logout.php"class="usernameBox" style="float:right"><?php echo $_SESSION['username'] ?></a>
             </ul>
         <div class="three" style="text-align:center; padding:20px;">
-            Avaliable Classrooms
+            Avaliable Classrooms: <?php echo $date ?>
             <table class="table">
                 <thead>
                   <tr>

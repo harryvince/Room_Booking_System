@@ -13,6 +13,7 @@ class ClassStartTimes {
 
     public $bookingStart;
     public $IDforROOM;
+    public $dateBooking;
 
     function set_booking($bookingStart){
         $this->bookingStart = $bookingStart;
@@ -26,16 +27,23 @@ class ClassStartTimes {
     function get_id(){
         return $this->IDforROOM;
     }
+    function set_date($dateBooking) {
+        $this->dateBooking = $dateBooking;
+    }
+    function get_dateBooking(){
+        return $this->dateBooking;
+    }
 
 }
 
+$dateToday = date('Y-m-d', strtotime('+1 day'));
 $arrayOfBookings = new ArrayObject(array());
 
 $statement = "SELECT room_table.Layout, room_table.RoomLocation, room_table.Capacity, room_table.Machines, room_table.RoomID
     FROM room_table";
 $result = $conn->query($statement);
 
-$CheckStatement = "SELECT room_table.Layout, room_table.RoomLocation, room_table.Capacity, room_table.Machines, booking_table.StartTime, booking_table.EndTime, booking_table.RoomID
+$CheckStatement = "SELECT room_table.Layout, room_table.RoomLocation, room_table.Capacity, room_table.Machines, booking_table.StartTime, booking_table.EndTime, booking_table.RoomID, booking_table.DateOfBooking
     FROM room_table INNER JOIN booking_table ON room_table.RoomID=booking_table.RoomID";
 $checkResults = $conn->query($CheckStatement);
 
@@ -54,12 +62,13 @@ if ($result->num_rows > 0){
                 $Finding = new ClassStartTimes();
                 $Finding->set_booking($row2['StartTime']);
                 $Finding->set_id($row2['RoomID']);
+                $Finding->set_date($row2['DateOfBooking']);
                 $arrayOfBookings->append($Finding);
             }
                 for($i = 9; $i <= 16; $i++){
                     $booked = "FALSE";
                     for($x = 0; $x < count($arrayOfBookings); $x++){
-                        if((like_match('%'.strval($i).'%', $arrayOfBookings[$x]->get_booking()) == 1 && $row['RoomID'] == $arrayOfBookings[$x]->get_id())){
+                        if((like_match('%'.strval($i).'%', $arrayOfBookings[$x]->get_booking()) == 1 && $row['RoomID'] == $arrayOfBookings[$x]->get_id() && $dateToday == $arrayOfBookings[$x]->get_dateBooking())){
                             $booked = "TRUE";
                             break;
                         } else {
