@@ -75,7 +75,7 @@ if ($result->num_rows > 0){
     <td><?=$capacity?></td>
     <td><?=$computers?></td>
     <td><?=$i?> - <?=$i+1?></td>
-    <td>Book Now!</td>
+    <td><button type='submit' class='Book' name='Book' id='<?=$row['RoomID']?>_<?=$_SESSION['userID']?>_<?=$i?>'>Book</button></td>
 </tr>
 
                         <?php
@@ -88,3 +88,23 @@ if ($result->num_rows > 0){
 }
 mysqli_close($conn);
 ?>
+<script>
+$(function(){
+  $(document).on('click','.Book',function(){
+    var join_id = this.id;
+    var split_join_id = join_id.split("_");
+    var room_join_id = split_join_id[0];
+    var user_id_join_id = split_join_id[1];
+    var time_booking = split_join_id[2];
+      $.ajax({
+          type:'POST',
+          url:'phpScripts/book.php',
+          data:{'room_join_id':room_join_id, 'user_id_join_id':user_id_join_id, 'time_booking':time_booking},
+          success: function(data){
+              alert ("Request Successfully Approved");
+              location.reload();
+          }
+      });
+  });
+});
+</script>
