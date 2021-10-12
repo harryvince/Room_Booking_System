@@ -9,6 +9,13 @@ function like_match($pattern, $subject)
     return (bool) preg_match("/^{$pattern}$/i", $subject);
 }
 
+if(isset($_POST['DATECONTROL'])) {
+    $DATECONTROL= mysqli_real_escape_string($conn, $_POST['DATECONTROL']);
+    $_SESSION['SelectedDate'] = $DATECONTROL;
+    $dateToday = date('Y-m-d', strtotime($_SESSION['SelectedDate']));
+} else{
+    $dateToday = date('Y-m-d', strtotime('+1 day'));
+}
 class ClassStartTimes {
 
     public $bookingStart;
@@ -36,7 +43,6 @@ class ClassStartTimes {
 
 }
 
-$dateToday = date('Y-m-d', strtotime('+1 day'));
 $arrayOfBookings = new ArrayObject(array());
 
 $statement = "SELECT room_table.Layout, room_table.RoomLocation, room_table.Capacity, room_table.Machines, room_table.RoomID
@@ -68,7 +74,7 @@ if ($result->num_rows > 0){
                 for($i = 9; $i <= 16; $i++){
                     $booked = "FALSE";
                     for($x = 0; $x < count($arrayOfBookings); $x++){
-                        if((like_match('%'.strval($i).'%', $arrayOfBookings[$x]->get_booking()) == 1 && $row['RoomID'] == $arrayOfBookings[$x]->get_id() && $dateToday == $arrayOfBookings[$x]->get_dateBooking())){
+                        if((like_match('%'.strval($i).'%', $arrayOfBookings[$x]->get_booking()) == 1 && $row['RoomID'] == $arrayOfBookings[$x]->get_id() && $_SESSION['SelectedDate'] == $arrayOfBookings[$x]->get_dateBooking())){
                             $booked = "TRUE";
                             break;
                         } else {
@@ -84,7 +90,7 @@ if ($result->num_rows > 0){
     <td><?=$capacity?></td>
     <td><?=$computers?></td>
     <td><?=$i?> - <?=$i+1?></td>
-    <td><button type='submit' class='Book' name='Book' id='<?=$row['RoomID']?>_<?=$_SESSION['userID']?>_<?=$i?>'>Book</button></td>
+    <td><button type='submit' class='Book' name='Book' id='<?=$row['RoomID']?>_<?=$_SESSION['userID']?>_<?=$i?>_<?=$_SESSION['SelectedDate']?>'>Book</button></td>
 </tr>
 
                         <?php
@@ -105,10 +111,11 @@ $(function(){
     var room_join_id = split_join_id[0];
     var user_id_join_id = split_join_id[1];
     var time_booking = split_join_id[2];
+    var DATEofBOOKING = split_join_id[3];
       $.ajax({
           type:'POST',
           url:'phpScripts/book.php',
-          data:{'room_join_id':room_join_id, 'user_id_join_id':user_id_join_id, 'time_booking':time_booking},
+          data:{'room_join_id':room_join_id, 'user_id_join_id':user_id_join_id, 'time_booking':time_booking, 'DATEofBOOKING':DATEofBOOKING},
           success: function(data){
               alert ("Request Successfully Approved");
               location.reload();

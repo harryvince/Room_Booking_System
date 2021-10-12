@@ -1,7 +1,6 @@
 <?php 
 require('phpScripts/auth_session.php');
 require('phpScripts/scripts.php');
-$date = date('Y-m-d', strtotime('+1 day'));
 ?>
 <html>
     <head>
@@ -15,7 +14,7 @@ $date = date('Y-m-d', strtotime('+1 day'));
                 <a href="phpScripts/logout.php"class="usernameBox" style="float:right"><?php echo $_SESSION['username'] ?></a>
             </ul>
         <div class="three" style="text-align:center; padding:20px;">
-            Avaliable Classrooms: <?php echo $date ?>
+            Avaliable Classrooms: <input type="date" Value="<?= $_SESSION['SelectedDate']?>" Style="text-align:center" id="datepicker">
             <table class="table">
                 <thead>
                   <tr>
@@ -45,5 +44,17 @@ $date = date('Y-m-d', strtotime('+1 day'));
 		}
 	});
 });
+$("#datepicker").on("change",function(){
+        var selected = $(this).val();
+        $.ajax({
+		    url: "phpScripts/AvailBooking.php",
+		    type: "POST",
+		    data:{'DATECONTROL':selected},
+		    success: function(dataResult){
+		    	alert ("Date Changed!");
+                location.reload();
+		    }
+	    });
+    });
 </script>
 </html>
