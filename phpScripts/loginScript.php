@@ -12,15 +12,32 @@ if(isset($_POST['username']) && isset($_POST['password'])) {
   $stmt = $conn -> prepare('SELECT * FROM login_table WHERE username = ? and password = ? LIMIT 1');
   $stmt -> bind_param('ss', $username, $password);
   $stmt -> execute();
-  $stmt -> bind_result($userid, $username, $password);
+  $stmt -> bind_result($userid, $username, $password, $usertype);
   $stmt -> store_result();
   if($stmt->num_rows == 1){
     if($stmt->fetch()){
-      $_SESSION['username'] = $username;
-      $_SESSION['password'] = $password;
-      $_SESSION['userID'] = $userid;
-      $_SESSION['SelectedDate'] = date('Y-m-d', time());
-      header("Location: dashboard.php");
+      if($usertype == 0){
+        $_SESSION['username'] = $username;
+        $_SESSION['password'] = $password;
+        $_SESSION['userID'] = $userid;
+        $_SESSION['userType'] = $usertype;
+        $_SESSION['SelectedDate'] = date('Y-m-d', time());
+        header("Location: dashboard.php");
+      } elseif ($usertype == 1){
+        $_SESSION['username'] = $username;
+        $_SESSION['password'] = $password;
+        $_SESSION['userID'] = $userid;
+        $_SESSION['userType'] = $usertype;
+        $_SESSION['SelectedDate'] = date('Y-m-d', time());
+        header("Location: ManagementDashboard.php");
+      } elseif ($usertype == 2){
+        $_SESSION['username'] = $username;
+        $_SESSION['password'] = $password;
+        $_SESSION['userID'] = $userid;
+        $_SESSION['userType'] = $usertype;
+        $_SESSION['SelectedDate'] = date('Y-m-d', time());
+        header("Location: TechDashboard.php");
+      }
     }
   }
   else {

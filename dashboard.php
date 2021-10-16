@@ -1,7 +1,9 @@
 <?php 
 require('phpScripts/auth_session.php');
 require('phpScripts/scripts.php');
-
+if($_SESSION['userType'] != 0){
+    header("Location: phpScripts/logout.php");
+}
 ?>
 <html>
     <head>
