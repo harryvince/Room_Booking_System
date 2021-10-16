@@ -7,7 +7,7 @@ if($_SESSION['userType'] != 0){
 ?>
 <html>
     <head>
-        <title> DigiTech - Room Booking Tool </title>
+        <title> DigiTech - Room Booking Tool | Staff Member</title>
     </head>
     <body>
             <ul class="toolbar">
