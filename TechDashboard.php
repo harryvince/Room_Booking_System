@@ -18,7 +18,7 @@ if($_SESSION['userType'] != 2){
         <div class="four" style="text-align:center; padding:20px;">
         <div class="centre-four">
         Reset Passwords
-        <?php require('phpScripts\resetPassword.php'); ?>
+        <?php require('phpScripts/resetPassword.php'); ?>
         <form class="loginForm" method="post">
           <input style="margin: 10px;" type="text" class="loginForm" class="login-input" name="username" placeholder="Username" required />
           <input style="margin: 10px;" type="password" id="psw" class="loginForm" class="login-input" name="check" placeholder="Enter Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
@@ -37,11 +37,16 @@ if($_SESSION['userType'] != 2){
         <div class="five" style="text-align:center; padding:20px;">
         <div class="centre-four">
         Create Users
-        <?php require('phpScripts\CreateUser.php'); ?>
+        <?php require('phpScripts/CreateUser.php'); ?>
         <form class="loginForm" method="post">
           <input style="margin: 10px;" type="text" class="loginForm" class="login-input" name="username1" placeholder="Username" required />
           <input style="margin: 10px;" type="password" id="psw1" class="loginForm" class="login-input" name="check" placeholder="Enter Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
           <input style="margin: 10px;" type="password" id="confirmpsw1" class="loginForm" class="login-input" name="check" placeholder="Confirm Password" required/>
+          <select class='selector' name='TypeUser'>
+            <option name='staff' value='0'>Staff Member</option>
+            <option name='manage' value='1'>Management</option>
+            <option name='admin' value='2'>Admin</option>
+          </select>
           <div id="message">
             <h3>Password must contain:</h3>
               <p id="letter1" class="invalid">A <b>lowercase</b> letter</p>
@@ -49,7 +54,7 @@ if($_SESSION['userType'] != 2){
               <p id="number1" class="invalid">A <b>number</b></p>
               <p id="length1" class="invalid">Minimum <b>8 characters</b></p>
           </div>
-          <input style="margin:10px;" type="submit" name="submit" onclick="return Validate1()" value="Reset Password" class="button">
+          <input style="margin:10px;" type="submit" name="submit" onclick="return Validate1()" value="Create User" class="button">
         </form>
         </div>
         </div>

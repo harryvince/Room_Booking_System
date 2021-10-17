@@ -7,6 +7,8 @@
         $password = stripslashes($_REQUEST['check']);
         $password = mysqli_real_escape_string($conn, $password);
         $password = hash('sha256', $password);
+        $type = stripslashes($_REQUEST['TypeUser']);
+        $type = mysqli_real_escape_string($conn, $type);
 
         $stmt = $conn -> prepare('SELECT username FROM login_table WHERE username = ? LIMIT 1');
         $stmt -> bind_param('s', $username);
@@ -19,8 +21,8 @@
                   <h3>This user already exists.</h3><br/>
                   </div>";
         } else {
-            $secure = $conn -> prepare('INSERT INTO login_table (username, password) VALUES (?, ?) LIMIT 1');
-            $secure -> bind_param('ss', $username, $password);
+            $secure = $conn -> prepare('INSERT INTO login_table (username, password, UserType) VALUES (?, ?, ?) LIMIT 1');
+            $secure -> bind_param('ssi', $username, $password, $type);
             $secure -> execute();
             echo "<div class='form'>
                   <h3>User Created.</h3><br/>
