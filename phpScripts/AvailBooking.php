@@ -88,7 +88,7 @@ if ($result->num_rows > 0){
     <td><img src="images/<?=$room?>.jpeg" style="width:50px;height:50px;"></td>
     <td><?=$room?></td>
     <td><?=$capacity?></td>
-    <td><?=$computers?></td>
+    <td><?=$machines?></td>
     <td><?=$i?> - <?=$i+1?></td>
     <td><button type='submit' class='Book' name='Book' id='<?=$row['RoomID']?>_<?=$_SESSION['userID']?>_<?=$i?>_<?=$_SESSION['SelectedDate']?>'>Book</button></td>
 </tr>
