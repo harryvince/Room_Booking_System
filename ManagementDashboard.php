@@ -35,7 +35,28 @@ if($_SESSION['userType'] != 1){
             </div>
         </div>
         <div class="five">
-
+            <div class="centre-four">
+                Edit Room Details
+                <br>
+                <br>
+                <form class="EditRoom" method="post" action="phpScripts/editRoom.php">
+                    <select class="EditSelect" name="EditSelect">
+                        <?= require('phpScripts/AllRooms.php'); ?>
+                    </select>
+                    <br>
+                    <br>
+                    <input style="text-align:center" type="number" name="Capacity" placeholder="Capacity" required />
+                    <br>
+                    <br>
+                    <select class="machines" name="machines">
+                        <option name='true' value='1'>Has Machines</option>
+                        <option name='false' value='0'>No Machines</option>
+                    </select>
+                    <br>
+                    <br>
+                    <input type="submit" value="Edit" name="edit">
+                </form>
+            </div>
         </div>
     </body>
 </html>
