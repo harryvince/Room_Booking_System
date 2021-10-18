@@ -45,17 +45,16 @@ class ClassStartTimes {
 
 $arrayOfBookings = new ArrayObject(array());
 
-$statement = "SELECT room_table.Layout, room_table.RoomLocation, room_table.Capacity, room_table.Machines, room_table.RoomID
+$statement = "SELECT room_table.RoomLocation, room_table.Capacity, room_table.Machines, room_table.RoomID
     FROM room_table";
 $result = $conn->query($statement);
 
-$CheckStatement = "SELECT room_table.Layout, room_table.RoomLocation, room_table.Capacity, room_table.Machines, booking_table.StartTime, booking_table.EndTime, booking_table.RoomID, booking_table.DateOfBooking
+$CheckStatement = "SELECT room_table.RoomLocation, room_table.Capacity, room_table.Machines, booking_table.StartTime, booking_table.EndTime, booking_table.RoomID, booking_table.DateOfBooking
     FROM room_table INNER JOIN booking_table ON room_table.RoomID=booking_table.RoomID";
 $checkResults = $conn->query($CheckStatement);
 
 if ($result->num_rows > 0){
     while($row = $result->fetch_assoc()){
-        $layout = $row['Layout'];
         $room = $row['RoomLocation'];
         $capacity = $row['Capacity'];
         $computers = $row['Machines'];
